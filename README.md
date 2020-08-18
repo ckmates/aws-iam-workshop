@@ -52,3 +52,37 @@
     ]
 }
 ```
+
+### 結合上述的條件，修改成組合版本
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": "ec2:*",
+            "Resource": "*",
+            "Condition": {
+                "ForAllValues:StringLike": {
+                    "ec2:InstanceType": [
+                        "t2.mirco",
+                        "t2.small"
+                    ]
+                },
+                "ForAnyValue:StringEquals": {
+                    "ec2:Region": [
+                        "ap-northeast-1",
+                        "us-east-1"
+                    ]
+                },
+                "IpAddress": {
+                    "aws:SourceIp": "0.0.0.0/0"
+                }
+            }
+        }
+    ]
+}
+
+
